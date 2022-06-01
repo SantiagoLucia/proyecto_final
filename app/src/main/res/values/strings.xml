@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">proyecto_final</string>
+
+
+    <string name="iniciar_sesion">Iniciar Sesion</string>
+    <string name="registrar">Registrarse</string>
+    <string name="boton_iniciar_sesion">Iniciar Sesion</string>
+    <string name="boton_registrarse">Registrarse</string>
+    <string name="boton_a_estacionar">Estacionar</string>
+    <string name="boton_a_info_seguro">Info Seguro</string>
+
+</resources>
