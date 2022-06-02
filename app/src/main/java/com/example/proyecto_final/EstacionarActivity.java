@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -119,6 +120,7 @@ public class EstacionarActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
         tv_updates.setText("Actualizando la ubicación.");
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, null);
