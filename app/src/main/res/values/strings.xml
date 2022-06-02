@@ -8,5 +8,6 @@
     <string name="boton_registrarse">Registrarse</string>
     <string name="boton_a_estacionar">Estacionar</string>
     <string name="boton_a_info_seguro">Info Seguro</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

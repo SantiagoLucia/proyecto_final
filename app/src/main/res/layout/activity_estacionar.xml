@@ -172,4 +172,27 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_address"
         tools:layout_editor_absoluteX="1dp" />
 
+    <Button
+        android:id="@+id/guardarUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Guardar Ubicacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sensor" />
+
+    <Button
+        android:id="@+id/btn_showMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ver mapa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guardarUbicacion"
+        app:layout_constraintVertical_bias="0.183" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

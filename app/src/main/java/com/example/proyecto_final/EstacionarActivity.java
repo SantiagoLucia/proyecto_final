@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +26,19 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EstacionarActivity extends AppCompatActivity {
+public class EstacionarActivity extends AppCompatActivity implements Serializable {
 
     public static final int DEFAULT_UPDATE_INTERVAL = 30;
     public static final int FAST_UPDATE_INTERVAL = 5;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
     TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
     Switch sw_locationupdates, sw_gps;
+
+    Button btn_waypoint, btn_showMap;
+    Location currentLocation, savedLocation;
 
     // variable para saber si estoy trackeando
     boolean updateOn = false;
@@ -60,6 +66,8 @@ public class EstacionarActivity extends AppCompatActivity {
         tv_address = findViewById(R.id.tv_address);
         sw_gps = findViewById(R.id.sw_gps);
         sw_locationupdates = findViewById(R.id.sw_locationsupdates);
+        btn_waypoint = findViewById(R.id.guardarUbicacion);
+        btn_showMap = findViewById(R.id.btn_showMap);
 
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(1000 * DEFAULT_UPDATE_INTERVAL);
@@ -76,6 +84,28 @@ public class EstacionarActivity extends AppCompatActivity {
                 updateUIValues(location);
             }
         };
+
+
+        btn_waypoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                savedLocation = currentLocation;
+                Toast.makeText(getApplicationContext(), "Ubicación guardada con éxito.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        btn_showMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                i.putExtra("locLat", savedLocation.getLatitude());
+                i.putExtra("locLon", savedLocation.getLongitude());
+                startActivity(i);
+
+            }
+        });
 
 
         sw_gps.setOnClickListener(new View.OnClickListener(){
@@ -167,6 +197,7 @@ public class EstacionarActivity extends AppCompatActivity {
                     // pongo los valores de location en los componetes de la UI
                     
                     updateUIValues(location);
+                    currentLocation = location;
 
                 }
             });
