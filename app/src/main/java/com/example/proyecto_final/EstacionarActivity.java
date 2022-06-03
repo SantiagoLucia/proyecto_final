@@ -29,9 +29,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import java.io.Serializable;
 import java.util.List;
 
-public class EstacionarActivity extends AppCompatActivity implements Serializable {
+public class EstacionarActivity extends AppCompatActivity {
 
-    public static final int DEFAULT_UPDATE_INTERVAL = 30;
+    public static final int DEFAULT_UPDATE_INTERVAL = 5;
     public static final int FAST_UPDATE_INTERVAL = 5;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
     TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
@@ -39,9 +39,6 @@ public class EstacionarActivity extends AppCompatActivity implements Serializabl
 
     Button btn_waypoint, btn_showMap;
     Location currentLocation, savedLocation;
-
-    // variable para saber si estoy trackeando
-    boolean updateOn = false;
 
     // location request es un archivo de configuracion de fused
     LocationRequest locationRequest;
@@ -72,7 +69,7 @@ public class EstacionarActivity extends AppCompatActivity implements Serializabl
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(1000 * DEFAULT_UPDATE_INTERVAL);
         locationRequest.setFastestInterval(1000 * FAST_UPDATE_INTERVAL);
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
 
         locationCallBack = new LocationCallback() {
@@ -80,8 +77,9 @@ public class EstacionarActivity extends AppCompatActivity implements Serializabl
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
                 // guardar la ubicacion
-                Location location = locationResult.getLastLocation();
-                updateUIValues(location);
+                // Location location = locationResult.getLastLocation();
+                currentLocation = locationResult.getLastLocation();
+                updateUIValues(currentLocation);
             }
         };
 
@@ -107,52 +105,11 @@ public class EstacionarActivity extends AppCompatActivity implements Serializabl
             }
         });
 
-
-        sw_gps.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (sw_gps.isChecked()) {
-                    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                    tv_sensor.setText("Usando sensor GPS");
-                }
-                else {
-                    locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-                    tv_sensor.setText("Usando Antenas + WIFI");
-                }
-            }
-        });
-
-        sw_locationupdates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (sw_locationupdates.isChecked()) {
-                    // enciendo el trackeo
-                    startLocationUpdates();
-                }
-                else {
-                    // apago el trackeo
-                    stopLocationUpdates();
-                }
-            }
-        });
-
         updateGPS();
+        startLocationUpdates();
 
     } // fin del metodo onCreate
 
-    private void stopLocationUpdates() {
-        tv_updates.setText("Ubicación detenida.");
-        tv_lat.setText("Sin ubicación");
-        tv_lon.setText("Sin ubicación");
-        tv_speed.setText("Sin ubicación");
-        tv_address.setText("Sin ubicación");
-        tv_accuracy.setText("Sin ubicación");
-        tv_altitude.setText("Sin ubicación");
-        tv_sensor.setText("Sin ubicación");
-
-        fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
-
-    }
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
@@ -195,10 +152,7 @@ public class EstacionarActivity extends AppCompatActivity implements Serializabl
                 @Override
                 public void onSuccess(Location location) {
                     // pongo los valores de location en los componetes de la UI
-                    
                     updateUIValues(location);
-                    currentLocation = location;
-
                 }
             });
         }
