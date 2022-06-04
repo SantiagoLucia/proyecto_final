@@ -7,34 +7,29 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="354dp"
-        android:layout_height="624dp"
+        android:layout_width="349dp"
+        android:layout_height="251dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/iniciar_sesion"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="irIniciar"
+            android:text="@string/iniciar_sesion" />
 
-            <Button
-                android:id="@+id/iniciar_sesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="irIniciar"
-                android:text="@string/iniciar_sesion" />
+        <Button
+            android:id="@+id/registrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="irRegistrar"
+            android:text="@string/registrar" />
 
-            <Button
-                android:id="@+id/registrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="irRegistrar"
-                android:text="@string/registrar" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

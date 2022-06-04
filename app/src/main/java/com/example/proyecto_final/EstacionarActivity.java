@@ -6,7 +6,9 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +37,13 @@ public class EstacionarActivity extends AppCompatActivity {
     public static final int DEFAULT_UPDATE_INTERVAL = 5;
     public static final int FAST_UPDATE_INTERVAL = 5;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
-    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
-    Switch sw_locationupdates, sw_gps;
+    TextView tv_lat, tv_lon, tv_address;
+
+    ImageView img_estacionam;
 
     Button btn_waypoint, btn_showMap;
-    Location currentLocation, savedLocation;
+    Location currentLocation;
+    double saved_lat, saved_lon;
 
     // location request es un archivo de configuracion de fused
     LocationRequest locationRequest;
@@ -53,16 +58,14 @@ public class EstacionarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estacionar);
 
+        SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+        saved_lat = Double.parseDouble(prefs.getString("latitud", "0"));
+        saved_lon = Double.parseDouble(prefs.getString("longitud", "0"));
+
         tv_lat = findViewById(R.id.tv_lat);
         tv_lon = findViewById(R.id.tv_lon);
-        tv_altitude = findViewById(R.id.tv_altitude);
-        tv_accuracy = findViewById(R.id.tv_accuracy);
-        tv_speed = findViewById(R.id.tv_speed);
-        tv_sensor = findViewById(R.id.tv_sensor);
-        tv_updates = findViewById(R.id.tv_updates);
         tv_address = findViewById(R.id.tv_address);
-        sw_gps = findViewById(R.id.sw_gps);
-        sw_locationupdates = findViewById(R.id.sw_locationsupdates);
+        img_estacionam = findViewById(R.id.iv_estacionam);
         btn_waypoint = findViewById(R.id.guardarUbicacion);
         btn_showMap = findViewById(R.id.btn_showMap);
 
@@ -77,7 +80,6 @@ public class EstacionarActivity extends AppCompatActivity {
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
                 // guardar la ubicacion
-                // Location location = locationResult.getLastLocation();
                 currentLocation = locationResult.getLastLocation();
                 updateUIValues(currentLocation);
             }
@@ -87,7 +89,13 @@ public class EstacionarActivity extends AppCompatActivity {
         btn_waypoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                savedLocation = currentLocation;
+                saved_lat = currentLocation.getLatitude();
+                saved_lon = currentLocation.getLongitude();
+                SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("latitud", String.valueOf(saved_lat));
+                editor.putString("longitud", String.valueOf(saved_lon));
+                editor.commit();
                 Toast.makeText(getApplicationContext(), "Ubicación guardada con éxito.", Toast.LENGTH_SHORT).show();
 
             }
@@ -97,11 +105,14 @@ public class EstacionarActivity extends AppCompatActivity {
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                i.putExtra("locLat", savedLocation.getLatitude());
-                i.putExtra("locLon", savedLocation.getLongitude());
-                startActivity(i);
-
+                if (saved_lat != 0) {
+                    Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                    i.putExtra("locLat", saved_lat);
+                    i.putExtra("locLon", saved_lon);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Debe guardar la ubicación.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -113,7 +124,6 @@ public class EstacionarActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
-        tv_updates.setText("Actualizando la ubicación.");
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, null);
         updateGPS();
     }
@@ -168,21 +178,6 @@ public class EstacionarActivity extends AppCompatActivity {
         // actualiza todos los text views
         tv_lat.setText(String.valueOf(location.getLatitude()));
         tv_lon.setText(String.valueOf(location.getLongitude()));
-        tv_accuracy.setText(String.valueOf(location.getAccuracy()));
-
-        if (location.hasAltitude()) {
-            tv_altitude.setText(String.valueOf(location.getAltitude()));
-        }
-        else {
-            tv_altitude.setText("No disponible");
-        }
-
-        if (location.hasSpeed()) {
-            tv_speed.setText(String.valueOf(location.getSpeed()));
-        }
-        else {
-            tv_speed.setText("No disponible");
-        }
 
         Geocoder geocoder = new Geocoder(getApplicationContext());
         try {

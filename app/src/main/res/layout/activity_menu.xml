@@ -19,14 +19,14 @@
         <Button
             android:id="@+id/aEstacionar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="97dp"
             android:onClick="aEstacionar"
             android:text="@string/boton_a_estacionar" />
 
         <Button
             android:id="@+id/aInfoSeguro"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="105dp"
             android:text="@string/boton_a_info_seguro" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
