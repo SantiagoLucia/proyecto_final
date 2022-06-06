@@ -1,11 +1,13 @@
 package com.example.proyecto_final;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +15,10 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.List;
 
 public class EstacionarActivity extends AppCompatActivity {
@@ -37,11 +42,14 @@ public class EstacionarActivity extends AppCompatActivity {
     public static final int DEFAULT_UPDATE_INTERVAL = 5;
     public static final int FAST_UPDATE_INTERVAL = 5;
     private static final int PERMISSIONS_FINE_LOCATION = 99;
-    TextView tv_lat, tv_lon, tv_address;
+    private static final int PERMISSION_CAMERA = 100;
+    private static final int CAPTURE_CODE = 101;
+    TextView tv_address;
 
     ImageView img_estacionam;
+    Uri image_uri;
 
-    Button btn_waypoint, btn_showMap;
+    Button btn_waypoint, btn_waypoint_photo, btn_showMap;
     Location currentLocation;
     double saved_lat, saved_lon;
 
@@ -61,12 +69,15 @@ public class EstacionarActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
         saved_lat = Double.parseDouble(prefs.getString("latitud", "0"));
         saved_lon = Double.parseDouble(prefs.getString("longitud", "0"));
+        image_uri = Uri.parse(prefs.getString("foto",""));
 
-        tv_lat = findViewById(R.id.tv_lat);
-        tv_lon = findViewById(R.id.tv_lon);
         tv_address = findViewById(R.id.tv_address);
+
         img_estacionam = findViewById(R.id.iv_estacionam);
+        img_estacionam.setImageURI(image_uri);
+
         btn_waypoint = findViewById(R.id.guardarUbicacion);
+        btn_waypoint_photo = findViewById(R.id.guardarUbicacion2);
         btn_showMap = findViewById(R.id.btn_showMap);
 
         locationRequest = LocationRequest.create();
@@ -96,11 +107,40 @@ public class EstacionarActivity extends AppCompatActivity {
                 editor.putString("latitud", String.valueOf(saved_lat));
                 editor.putString("longitud", String.valueOf(saved_lon));
                 editor.commit();
+                img_estacionam.setImageResource(R.drawable.ic_baseline_image_24);
                 Toast.makeText(getApplicationContext(), "Ubicación guardada con éxito.", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        btn_waypoint_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) ==
+                            PackageManager.PERMISSION_DENIED ||
+                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                            PackageManager.PERMISSION_DENIED) {
+
+                        String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(permission, PERMISSION_CAMERA);
+
+                    } else {
+                        openCamera();
+
+                        saved_lat = currentLocation.getLatitude();
+                        saved_lon = currentLocation.getLongitude();
+                        SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("latitud", String.valueOf(saved_lat));
+                        editor.putString("longitud", String.valueOf(saved_lon));
+                        editor.commit();
+                        Toast.makeText(getApplicationContext(), "Ubicación guardada con éxito.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +161,28 @@ public class EstacionarActivity extends AppCompatActivity {
 
     } // fin del metodo onCreate
 
+    private void openCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE,"nuevo estacionamiento");
+        values.put(MediaStore.Images.Media.DESCRIPTION,"Nueva ubicación de estacionamiento");
+        image_uri=getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+        Intent camintent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        camintent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
+        startActivityForResult(camintent,CAPTURE_CODE);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data) {
+        if (resultCode == RESULT_OK) {
+            img_estacionam.setImageURI(image_uri);
+            SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("foto", image_uri.toString());
+            editor.commit();
+            Toast.makeText(getApplicationContext(), image_uri.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
@@ -142,6 +204,16 @@ public class EstacionarActivity extends AppCompatActivity {
                     finish();
                 }
             break;
+
+            case PERMISSION_CAMERA:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Esta app requiere permisos para ejecutarse correctamente", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
         }
 
     }
@@ -176,8 +248,6 @@ public class EstacionarActivity extends AppCompatActivity {
 
     private void updateUIValues(Location location) {
         // actualiza todos los text views
-        tv_lat.setText(String.valueOf(location.getLatitude()));
-        tv_lon.setText(String.valueOf(location.getLongitude()));
 
         Geocoder geocoder = new Geocoder(getApplicationContext());
         try {
