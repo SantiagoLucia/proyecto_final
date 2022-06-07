@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class EstacionarActivity extends AppCompatActivity {
     private static final int CAPTURE_CODE = 101;
     TextView tv_address;
 
-    ImageView img_estacionam;
+    ImageButton img_estacionam;
     Uri image_uri;
 
     Button btn_waypoint, btn_waypoint_photo, btn_showMap;
@@ -96,6 +97,13 @@ public class EstacionarActivity extends AppCompatActivity {
             }
         };
 
+        img_estacionam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), ExpandirImagenActivity.class);
+                    startActivity(i);
+            }
+        });
 
         btn_waypoint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,5 +268,6 @@ public class EstacionarActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

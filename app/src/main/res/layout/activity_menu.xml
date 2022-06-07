@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/aDatosControl2"
+            android:id="@+id/aDatosControl"
             android:layout_width="match_parent"
             android:layout_height="105dp"
             android:text="datos control" />
