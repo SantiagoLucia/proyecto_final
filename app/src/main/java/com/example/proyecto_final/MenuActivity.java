@@ -19,4 +19,8 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void aInfracciones(View view) {
+        Intent i = new Intent(getApplicationContext(), MultasActivity.class);
+        startActivity(i);
+    }
 }
