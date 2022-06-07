@@ -70,13 +70,17 @@ public class EstacionarActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
         saved_lat = Double.parseDouble(prefs.getString("latitud", "0"));
         saved_lon = Double.parseDouble(prefs.getString("longitud", "0"));
-        image_uri = Uri.parse(prefs.getString("foto",""));
 
         tv_address = findViewById(R.id.tv_address);
 
         img_estacionam = findViewById(R.id.iv_estacionam);
-        img_estacionam.setImageURI(image_uri);
 
+        if (!prefs.getString("foto","").equals("")) {
+            img_estacionam.setImageURI(Uri.parse(prefs.getString("foto", "")));
+        }
+        else {
+            img_estacionam.setImageResource(R.drawable.ic_baseline_image_24);
+        }
         btn_waypoint = findViewById(R.id.guardarUbicacion);
         btn_waypoint_photo = findViewById(R.id.guardarUbicacion2);
         btn_showMap = findViewById(R.id.btn_showMap);
@@ -100,8 +104,10 @@ public class EstacionarActivity extends AppCompatActivity {
         img_estacionam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!prefs.getString("foto","").equals("")) {
                     Intent i = new Intent(getApplicationContext(), ExpandirImagenActivity.class);
                     startActivity(i);
+                }
             }
         });
 
@@ -114,8 +120,9 @@ public class EstacionarActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("latitud", String.valueOf(saved_lat));
                 editor.putString("longitud", String.valueOf(saved_lon));
-                editor.commit();
                 img_estacionam.setImageResource(R.drawable.ic_baseline_image_24);
+                editor.putString("foto","");
+                editor.commit();
                 Toast.makeText(getApplicationContext(), "Ubicación guardada con éxito.", Toast.LENGTH_SHORT).show();
 
             }
