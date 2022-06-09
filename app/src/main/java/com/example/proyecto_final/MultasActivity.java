@@ -23,17 +23,21 @@ public class MultasActivity extends AppCompatActivity {
         btn_prov.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openWebPage("https://infraccionesba.gba.gob.ar/consulta-infraccion");
+                Intent i = new Intent(getApplicationContext(), WebActivity.class);
+                i.putExtra("url", "https://infraccionesba.gba.gob.ar/consulta-infraccion");
+                startActivity(i);
+
             }
         });
 
-    }
+        btn_nac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), WebActivity.class);
+                i.putExtra("url", "https://consultainfracciones.seguridadvial.gob.ar");
+                startActivity(i);
 
-    public void openWebPage(String url) {
-        Uri webpage = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+            }
+        });
     }
 }
