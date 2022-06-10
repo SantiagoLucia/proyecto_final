@@ -68,6 +68,7 @@ public class EstacionarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_estacionar);
 
         SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
         saved_lat = Double.parseDouble(prefs.getString("latitud", "0"));
         saved_lon = Double.parseDouble(prefs.getString("longitud", "0"));
 
@@ -76,7 +77,13 @@ public class EstacionarActivity extends AppCompatActivity {
         img_estacionam = findViewById(R.id.iv_estacionam);
 
         if (!prefs.getString("foto","").equals("")) {
-            img_estacionam.setImageURI(Uri.parse(prefs.getString("foto", "")));
+            try {
+                img_estacionam.setImageURI(Uri.parse(prefs.getString("foto", "")));
+            } catch (Exception e){
+                img_estacionam.setImageResource(R.drawable.ic_baseline_image_24);
+                editor.putString("foto","");
+                editor.commit();
+            }
         }
         else {
             img_estacionam.setImageResource(R.drawable.ic_baseline_image_24);
