@@ -3,7 +3,9 @@ package com.example.proyecto_final;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,16 +47,22 @@ public class IniciarSesionActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putInt("logueado", 1);
+                            editor.commit();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
-                            Toast.makeText(getApplicationContext(), "Autenticacion Correcta.",
+                            Toast.makeText(getApplicationContext(), "Autenticación Correcta.",
                                     Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
+                            //finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(getApplicationContext(), "Error al iniciar sesión.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }

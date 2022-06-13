@@ -67,7 +67,7 @@ public class EstacionarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estacionar);
 
-        SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         saved_lat = Double.parseDouble(prefs.getString("latitud", "0"));
         saved_lon = Double.parseDouble(prefs.getString("longitud", "0"));
@@ -123,7 +123,7 @@ public class EstacionarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saved_lat = currentLocation.getLatitude();
                 saved_lon = currentLocation.getLongitude();
-                SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("latitud", String.valueOf(saved_lat));
                 editor.putString("longitud", String.valueOf(saved_lon));
@@ -153,7 +153,7 @@ public class EstacionarActivity extends AppCompatActivity {
 
                         saved_lat = currentLocation.getLatitude();
                         saved_lon = currentLocation.getLongitude();
-                        SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+                        SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("latitud", String.valueOf(saved_lat));
                         editor.putString("longitud", String.valueOf(saved_lon));
@@ -198,7 +198,7 @@ public class EstacionarActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data) {
         if (resultCode == RESULT_OK) {
             img_estacionam.setImageURI(image_uri);
-            SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("foto", image_uri.toString());
             editor.commit();
