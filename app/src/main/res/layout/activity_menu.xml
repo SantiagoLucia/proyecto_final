@@ -7,6 +7,7 @@
     tools:context=".MenuActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="360dp"
         android:layout_height="652dp"
         android:gravity="center"
@@ -41,5 +42,19 @@
             android:layout_width="match_parent"
             android:layout_height="105dp"
             android:text="telefonos utiles" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="cerrarSesion"
+        android:text="Cerrar Sesión"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
