@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email"
-            android:textColor="#000000"
+            android:textColor="#0B1D83"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
             android:inputType="textPersonName"
             android:padding="8dp"
             android:paddingRight="30dp"
-            android:textColor="#8e8e8e"
+            android:textColor="#000000"
             android:textColorHint="#757575"
             android:textSize="18dp" />
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contraseña"
-            android:textColor="#000000"
+            android:textColor="#0B1D83"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -89,7 +89,7 @@
             android:inputType="textPassword"
             android:padding="8dp"
             android:paddingRight="30dp"
-            android:textColor="#8e8e8e"
+            android:textColor="#000000"
             android:textColorHint="#8e8e8e"
             android:textSize="18dp"
             tools:ignore="SpeakableTextPresentCheck" />

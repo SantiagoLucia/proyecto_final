@@ -110,7 +110,7 @@
         android:paddingRight="30dp"
         android:gravity="center"
         android:onClick="cerrarSesion"
-        android:text="Cerrar Sesión"
+        android:text="Cerrar Sesion"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
