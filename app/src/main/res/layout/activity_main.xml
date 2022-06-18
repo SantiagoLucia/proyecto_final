@@ -14,58 +14,74 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/background_page" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background_page" />
+        app:srcCompat="@drawable/png_car" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="158dp"
+        android:layout_height="72dp"
+        android:text="AYUDA AL CONDUCTOR"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/iniciar_sesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/iniciar_sesion"
         style="android:style/Widget.Button"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/orange_button_background"
         android:drawableRight="?attr/homeAsUpIndicator"
         android:drawablePadding="0dp"
-        android:paddingRight="30dp"
         android:gravity="center"
         android:onClick="irIniciar"
+        android:paddingRight="30dp"
         android:text="Iniciar Sesion"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/registrar"
         style="android:style/Widget.Button"
-        android:layout_width="0dp"
+        android:layout_width="347dp"
         android:layout_height="55dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="284dp"
         android:background="@drawable/orange_button_background"
         android:drawableRight="?attr/homeAsUpIndicator"
         android:drawablePadding="0dp"
-        android:paddingRight="30dp"
         android:gravity="center"
         android:onClick="irRegistrar"
+        android:paddingRight="30dp"
         android:text="Registrarse"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iniciar_sesion" />
+        app:layout_constraintTop_toBottomOf="@+id/iniciar_sesion"
+        app:layout_constraintVertical_bias="0.246" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
