@@ -17,9 +17,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/background_page" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        app:srcCompat="@drawable/png_car" />
+
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
         android:background="@drawable/white_background"
         android:orientation="vertical"
         android:padding="32dp"
@@ -44,16 +57,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:background="@color/white"
+            android:drawableRight="@android:drawable/ic_dialog_email"
+            android:drawablePadding="0dp"
             android:ems="10"
             android:hint="tucorreo@email.com"
             android:inputType="textPersonName"
             android:padding="8dp"
+            android:paddingRight="30dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#757575"
-            android:textSize="18dp"
-            android:drawableRight="@android:drawable/ic_dialog_email"
-            android:drawablePadding="0dp"
-            android:paddingRight="30dp"/>
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textView4"
@@ -71,16 +84,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:background="@color/white"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:drawablePadding="0dp"
             android:ems="10"
             android:inputType="textPassword"
             android:padding="8dp"
+            android:paddingRight="30dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
             android:textSize="18dp"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:drawableRight="@android:drawable/ic_lock_idle_lock"
-            android:drawablePadding="0dp"
-            android:paddingRight="30dp"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/textView5"
@@ -98,16 +111,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:background="@color/white"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:drawablePadding="0dp"
             android:ems="10"
             android:inputType="textPassword"
             android:padding="8dp"
+            android:paddingRight="30dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
             android:textSize="18dp"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:drawableRight="@android:drawable/ic_lock_idle_lock"
-            android:drawablePadding="0dp"
-            android:paddingRight="30dp"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/iniciarSesionBtn"
