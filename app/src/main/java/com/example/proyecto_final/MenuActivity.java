@@ -36,4 +36,9 @@ public class MenuActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), MultasActivity.class);
         startActivity(i);
     }
+
+    public void aTelefonos(View view) {
+        Intent i = new Intent(getApplicationContext(), TelefonoActivity.class);
+        startActivity(i);
+    }
 }
