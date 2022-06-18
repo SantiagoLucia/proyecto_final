@@ -6,22 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MultasActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_page" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/infracProvincia"
-            android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:text="infracciones provincia" />
+            android:layout_width="350dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"
+            android:text="infracciones provincia"
+            android:drawableRight="@android:drawable/stat_notify_error"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"/>
 
         <Button
             android:id="@+id/infracNacion"
-            android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:text="infracciones nacion" />
+            android:layout_width="350dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"
+            android:text="infracciones nacion"
+            android:drawableRight="@android:drawable/stat_notify_error"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

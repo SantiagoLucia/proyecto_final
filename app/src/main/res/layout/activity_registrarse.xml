@@ -50,7 +50,10 @@
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#757575"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:drawableRight="@android:drawable/ic_dialog_email"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"/>
 
         <TextView
             android:id="@+id/textView4"
@@ -74,7 +77,10 @@
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
             android:textSize="18dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -98,7 +104,10 @@
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
             android:textSize="18dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"/>
 
         <Button
             android:id="@+id/iniciarSesionBtn"
