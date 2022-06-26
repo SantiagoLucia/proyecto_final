@@ -40,8 +40,12 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void aDatosControl(View view){
+    public void aDatosControl(View view) {
         Intent i = new Intent(getApplicationContext(), DatosControlActivity.class);
+        startActivity(i);
+    }
+    public void aTelefonos(View view) {
+        Intent i = new Intent(getApplicationContext(), TelefonoActivity.class);
         startActivity(i);
     }
 }

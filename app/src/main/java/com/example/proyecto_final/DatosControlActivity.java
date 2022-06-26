@@ -114,10 +114,9 @@ public class DatosControlActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // adding on click listener to our action of snack bar.
                         // below line is to add our item to array list with a position.
-                        db.Insert(deletedReminder);
                         // below line is to notify item is
                         // added to our adapter class.
-                        ar.notifyItemInserted(position);
+                        //ar.notifyItemInserted(position);
                         configurarReminder(deletedReminder.getMessage(),deletedReminder.getRemindDate().toString());
                         setItemsInView();
                     }
@@ -131,6 +130,8 @@ public class DatosControlActivity extends AppCompatActivity {
     }
 
     public void addReminder(){
+
+        final String[] uglyDate = new String[1];
 
         dialog = new Dialog(DatosControlActivity.this);
         dialog.setContentView(R.layout.popup_crear_alerta);
@@ -160,11 +161,18 @@ public class DatosControlActivity extends AppCompatActivity {
                                 newDate.set(year,month,dayOfMonth,hourOfDay,minute,0);
                                 Calendar tem = Calendar.getInstance();
                                 Log.w("TIME",System.currentTimeMillis()+"");
-                                if(newDate.getTimeInMillis()-tem.getTimeInMillis()>0)
-                                    textView.setText(newDate.getTime().toString());
-                                else
-                                    Toast.makeText(DatosControlActivity.this,"Esa fecha/hora ya pasó.",Toast.LENGTH_SHORT).show();
-
+                                if(newDate.getTimeInMillis()-tem.getTimeInMillis()>0) {
+                                    String humanDate = "";
+                                    try {
+                                        humanDate = adapter.humanDate(newDate.getTime().toString());
+                                        uglyDate[0] = newDate.getTime().toString();
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    textView.setText(humanDate);
+                                }else {
+                                    Toast.makeText(DatosControlActivity.this, "Esa fecha/hora ya pasó.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         },newTime.get(Calendar.HOUR_OF_DAY),newTime.get(Calendar.MINUTE),true);
                         time.show();
@@ -183,7 +191,7 @@ public class DatosControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                configurarReminder(message.getText().toString(), textView.getText().toString());
+                configurarReminder(message.getText().toString(), uglyDate[0]);
 
                 Toast.makeText(DatosControlActivity.this,"Inserted Successfully",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();

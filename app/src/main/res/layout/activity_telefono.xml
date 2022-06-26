@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelefonoActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_page" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnAmbulancia"
+            android:text="Ambulancia"
+            android:onClick="llamarAmb"
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:drawableRight="@drawable/ic_baseline_local_hospital_24"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/btnBomberos"
+            android:text="Bomberos"
+            android:onClick="llamarBom"
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:drawableRight="@drawable/ic_baseline_local_fire_department_24"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/btnPolicia"
+            android:text="Policia"
+            android:onClick="llamarPol"
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:drawableRight="@drawable/ic_baseline_local_police_24"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/btnDefCivil"
+            android:text="Defensa Civil"
+            android:onClick="llamarDef"
+            android:layout_width="350dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/orange_button_background"
+            android:drawableRight="@drawable/ic_baseline_handyman_24"
+            android:drawablePadding="0dp"
+            android:paddingRight="30dp"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="40dp"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

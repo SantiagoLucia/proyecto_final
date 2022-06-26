@@ -84,6 +84,7 @@
 
         <Button
             android:id="@+id/aTelefonosUtiles"
+            android:onClick="aTelefonos"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
