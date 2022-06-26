@@ -39,6 +39,7 @@
             android:drawableRight="@android:drawable/ic_menu_today"
             android:drawablePadding="0dp"
             android:paddingRight="30dp"
+            android:onClick="aDatosControl"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginStart="32dp"

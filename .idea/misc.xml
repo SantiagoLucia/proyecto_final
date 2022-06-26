@@ -31,6 +31,18 @@
         <entry key="..\:/Users/santi/Desktop/proyecto_final/app/src/main/res/layout/activity_multas.xml" value="0.29238440616500455" />
         <entry key="..\:/Users/santi/Desktop/proyecto_final/app/src/main/res/layout/activity_registrarse.xml" value="0.33" />
         <entry key="..\:/Users/santi/Desktop/proyecto_final/app/src/main/res/layout/activity_web.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/orange_button_background.xml" value="0.158" />
+        <entry key="app/src/main/res/layout/activity_datos_control.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_estacionar.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_iniciar_sesion.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_multas.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_registrarse.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/activity_web.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/alerta_modelo.xml" value="0.19801980198019803" />
+        <entry key="app/src/main/res/layout/popup_crear_alerta.xml" value="0.25" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

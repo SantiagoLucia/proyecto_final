@@ -14,7 +14,10 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        MainActivity.mainAct.finish();
+        if (MainActivity.mainAct != null){
+            MainActivity.mainAct.finish();
+        }
+
     }
 
     public void cerrarSesion(View view) {
@@ -34,6 +37,11 @@ public class MenuActivity extends AppCompatActivity {
 
     public void aInfracciones(View view) {
         Intent i = new Intent(getApplicationContext(), MultasActivity.class);
+        startActivity(i);
+    }
+
+    public void aDatosControl(View view){
+        Intent i = new Intent(getApplicationContext(), DatosControlActivity.class);
         startActivity(i);
     }
 }
