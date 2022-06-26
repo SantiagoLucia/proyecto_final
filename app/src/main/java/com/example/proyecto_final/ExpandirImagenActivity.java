@@ -17,7 +17,7 @@ public class ExpandirImagenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expandir_imagen);
-        SharedPreferences prefs = getSharedPreferences("ubicacion_auto", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("mi_auto", Context.MODE_PRIVATE);
         img = findViewById(R.id.imagenEst);
         image_uri = Uri.parse(prefs.getString("foto",""));
         img.setImageURI(image_uri);
