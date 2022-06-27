@@ -71,7 +71,7 @@ public class AdapterReminders extends RecyclerView.Adapter<AdapterReminders.MyVi
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE MMMM d HH:mm:ss z yyyy", Locale.ENGLISH);
         Log.d("DATE_TEST", String.valueOf(dateFormat.parse(date)));
         calendar.setTime(dateFormat.parse(date));
-        String fecha = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String fecha = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR);
         String hora = String.format("%02d:%02d",calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE));
         cutted = fecha + " a las " + hora;
         return cutted;

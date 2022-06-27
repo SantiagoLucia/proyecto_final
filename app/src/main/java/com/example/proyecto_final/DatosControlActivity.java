@@ -178,7 +178,7 @@ public class DatosControlActivity extends AppCompatActivity {
                         time.show();
 
                     }
-                },newCalender.get(Calendar.YEAR),newCalender.get(Calendar.MONTH)+1,newCalender.get(Calendar.DAY_OF_MONTH));
+                },newCalender.get(Calendar.YEAR),newCalender.get(Calendar.MONTH),newCalender.get(Calendar.DAY_OF_MONTH));
 
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 dialog.show();
