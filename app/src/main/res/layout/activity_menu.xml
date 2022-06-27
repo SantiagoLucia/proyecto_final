@@ -34,7 +34,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="datos control"
+            android:text="Alertas"
             android:background="@drawable/orange_button_background"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:drawablePadding="0dp"
